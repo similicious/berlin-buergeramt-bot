@@ -1,5 +1,6 @@
 // Imports
 require('dotenv').config()
+const got = require('got');
 const { ToadScheduler, SimpleIntervalJob, AsyncTask } = require('toad-scheduler')
 
 const getAvailableAppointments = require('./get-available-appointments');
@@ -16,6 +17,10 @@ async function checkForAppointments() {
   let bookingPageHtml = await getBookingPageHtml();
   const dates = getAvailableAppointments(bookingPageHtml);
 
-  console.log(dates);
+  // Ping healthchecks.io
+  if(process.env.HEALTHCHECKS_IO_TOKEN) {
+    await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`)
+  }
 
+  console.log(dates);
 };
