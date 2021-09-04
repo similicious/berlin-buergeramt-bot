@@ -9,7 +9,7 @@ It periodically checks the given buergeramt appointment page for new appointment
 ## Getting started
 * clone the repository
 ```
-https://github.com/similicious/berlin-buergeramt-bot 
+git clone https://github.com/similicious/berlin-buergeramt-bot 
 ```
 * cd into the cloned repository
 * install dependencies
