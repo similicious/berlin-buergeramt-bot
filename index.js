@@ -1,28 +1,21 @@
+// Imports
 require('dotenv').config()
-const got = require('got');
+const { ToadScheduler, SimpleIntervalJob, AsyncTask } = require('toad-scheduler')
 
 const getAvailableAppointments = require('./get-available-appointments');
+const getBookingPageHtml = require('./get-booking-page-html');
 
-(async () => {
+// Setup simple scheduler
+const scheduler = new ToadScheduler()
+const checkForAppointmentsTask = new AsyncTask('checkForAppointments', checkForAppointments, console.err)
+const job = new SimpleIntervalJob({ minutes: process.env.CHECK_INTERVAL_MINUTES, runImmediately: true }, checkForAppointmentsTask)
+scheduler.addSimpleIntervalJob(job)
 
-  // Request booking url to receive the booking system cookie
-  let res = await got(process.env.BOOKING_URL, {
-    headers: { 'user-agent': process.env.USER_AGENT },
-    followRedirect: false
-  });
+async function checkForAppointments() {
 
-  // Get cookie
-  const cookie = res.headers['set-cookie'][0];
+  let bookingPageHtml = await getBookingPageHtml();
+  const dates = getAvailableAppointments(bookingPageHtml);
 
-  // Request appointment page using the cookie
-  res = await got('https://service.berlin.de/terminvereinbarung/termin/day/', {
-    headers: {
-      'cookie': cookie,
-      'user-agent': process.env.USER_AGENT
-    },
-    followRedirect: false
-  });
+  console.log(dates);
 
-  getAvailableAppointments(res.body);
-
-})();
+};
