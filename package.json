@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon ./index.js",
     "start": "node ./index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "Simon Wienecke",
   "license": "MIT",
