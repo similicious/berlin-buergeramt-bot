@@ -1,6 +1,5 @@
 require('dotenv').config()
 const got = require('got');
-const fs = require('fs');
 
 const getAvailableAppointments = require('./get-available-appointments');
 
