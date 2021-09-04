@@ -1,19 +1,21 @@
 require('dotenv').config()
 const got = require('got');
-const cheerio = require('cheerio');
 const fs = require('fs');
 
-getAvailableAppointments();
+const getAvailableAppointments = require('./get-available-appointments');
 
-async function getAvailableAppointments() {
+(async () => {
 
+  // Request booking url to receive the booking system cookie
   let res = await got(process.env.BOOKING_URL, {
     headers: { 'user-agent': process.env.USER_AGENT },
     followRedirect: false
   });
 
+  // Get cookie
   const cookie = res.headers['set-cookie'][0];
 
+  // Request appointment page using the cookie
   res = await got('https://service.berlin.de/terminvereinbarung/termin/day/', {
     headers: {
       'cookie': cookie,
@@ -22,11 +24,6 @@ async function getAvailableAppointments() {
     followRedirect: false
   });
 
-  // res = fs.readFileSync(__dirname + '/test/fixtures/appointment-available.html', { encoding: 'utf8' });
+  getAvailableAppointments(res.body);
 
-  const $ = cheerio.load(res);
-  const termin = $('table td.buchbar');
-  if (termin.length !== 0) {
-    console.log(termin.find('a').attr('href'))
-  }
-}
+})();
