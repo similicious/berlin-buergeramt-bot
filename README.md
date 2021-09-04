@@ -35,3 +35,9 @@ node index.js
 ```
 
 Optionally, you can use a node process manager like pm2 to monitor the app and automatically start the bot on boot.
+
+## Run tests
+I included some snapshots of appointment pages in various states. Execute test with
+```
+npm run test
+```
