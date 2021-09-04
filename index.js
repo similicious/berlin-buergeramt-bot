@@ -5,6 +5,7 @@ const { ToadScheduler, SimpleIntervalJob, AsyncTask } = require('toad-scheduler'
 
 const getAvailableAppointments = require('./get-available-appointments');
 const getBookingPageHtml = require('./get-booking-page-html');
+const sendTelegramNotification = require('./send-telegram-notification');
 
 // Setup simple scheduler
 const scheduler = new ToadScheduler()
@@ -17,10 +18,13 @@ async function checkForAppointments() {
   let bookingPageHtml = await getBookingPageHtml();
   const dates = getAvailableAppointments(bookingPageHtml);
 
+  if(dates.length > 0) {
+    const message = `Buergeramt appointments are available now! Check ${process.env.BOOKING_URL}`
+    await sendTelegramNotification(message)
+  }
+
   // Ping healthchecks.io
   if(process.env.HEALTHCHECKS_IO_TOKEN) {
     await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`)
   }
-
-  console.log(dates);
 };
