@@ -7,20 +7,20 @@ It periodically checks the given buergeramt appointment page for new appointment
 **USE AT OWN RISK**
 
 ## Getting started
-1. cone the repository
+* clone the repository
 ```
 https://github.com/similicious/berlin-buergeramt-bot 
 ```
-1. cd into the cloned repository
-1. install dependencies
+* cd into the cloned repository
+* install dependencies
 ```
 npm install
 ```
-1. copy .env.sample
+* create .env by copying .env.sample
 ```
-cp .env.sample cp .env
+cp .env.sample .env
 ```
-1. edit .env to suit your needs
+* edit .env to suit your needs
 ```
 BOOKING_URL=The link to the appointments page. Use the link behind "Termin buchen" or "Termin berlinweit suchen" buttons.
 USER_AGENT=A string containing your email address
@@ -29,7 +29,7 @@ TELEGRAM_BOT_TOKEN=
 TELEGRAM_CHAT_ID=
 HEALTHCHECKS_IO_TOKEN=Optional healthchecks.io token to monitor the bot
 ```
-1. start index.js
+* start index.js
 ```
 node index.js
 ```
