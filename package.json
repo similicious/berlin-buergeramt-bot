@@ -1,0 +1,21 @@
+{
+  "name": "berlin-buergeramt-bot",
+  "version": "1.0.0",
+  "description": "A bot notify me when an buergeramt appointment is available.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
+  },
+  "author": "Simon Wienecke",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^10.0.0",
+    "got": "^11.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.17.14",
+    "nodemon": "^2.0.12"
+  }
+}
