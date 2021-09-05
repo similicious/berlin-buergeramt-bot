@@ -9,7 +9,7 @@ const sendTelegramNotification = require('./send-telegram-notification');
 
 // Setup simple scheduler
 const scheduler = new ToadScheduler()
-const checkForAppointmentsTask = new AsyncTask('checkForAppointments', checkForAppointments, console.err)
+const checkForAppointmentsTask = new AsyncTask('checkForAppointments', checkForAppointments, handleErrors)
 const job = new SimpleIntervalJob({ minutes: process.env.CHECK_INTERVAL_MINUTES, runImmediately: true }, checkForAppointmentsTask)
 scheduler.addSimpleIntervalJob(job)
 
@@ -28,3 +28,8 @@ async function checkForAppointments() {
     await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`)
   }
 };
+
+async function handleErrors(err)  {
+  console.err(err);
+  await sendTelegramNotification(JSON.stringify(err));
+}
