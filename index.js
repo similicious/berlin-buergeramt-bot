@@ -18,18 +18,18 @@ async function checkForAppointments() {
   let bookingPageHtml = await getBookingPageHtml();
   const dates = getAvailableAppointments(bookingPageHtml);
 
-  if(dates.length > 0) {
+  if (dates.length > 0) {
     const message = `Buergeramt appointments are available now! Check ${process.env.BOOKING_URL}`
     await sendTelegramNotification(message)
   }
 
   // Ping healthchecks.io
-  if(process.env.HEALTHCHECKS_IO_TOKEN) {
+  if (process.env.HEALTHCHECKS_IO_TOKEN) {
     await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`)
   }
 };
 
-async function handleErrors(err)  {
-  console.err(err);
+async function handleErrors(err) {
+  console.error(err);
   await sendTelegramNotification(JSON.stringify(err));
 }
