@@ -1,6 +1,7 @@
 # Berlin Bürgeramt Appointment Bot
 A bot that sends a notification when a buergeramt appointment is available. 
 It periodically checks the given buergeramt appointment page for new appointments. It then notifies the user using Telgram.
+As of now, this bot is meant to be self hosted - it can easily be run on a raspberry pi or a cheap vps.
 
 **Please use responsibly**: Set a USER_AGENT containing contact information in case something goes wrong.
 
