@@ -5,6 +5,7 @@ async function getBookingPageHtml() {
   // Request booking url to receive the booking system cookie
   let res = await got(process.env.BOOKING_URL, {
     headers: { 'user-agent': process.env.USER_AGENT },
+    // As got isn't following redirects properly, we have to make the second request explicitly
     followRedirect: false
   });
 
