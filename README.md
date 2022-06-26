@@ -7,6 +7,9 @@ As of now, this bot is meant to be self hosted - it can easily be run on a raspb
 
 **USE AT OWN RISK**
 
+## Limitations
+Currently this bot is only checking the current and the next month, as I was mainly going for appointments on short notice.
+
 ## Getting started
 * clone the repository
 ```
