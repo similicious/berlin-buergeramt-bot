@@ -23,9 +23,12 @@ async function checkForAppointments() {
     await sendTelegramNotification(message)
   }
 
+  const date = new Date().toISOString();
+  const message = `${dates.length} appointments found.`
+  console.log(`${date} ${message}`)
   // Ping healthchecks.io
   if (process.env.HEALTHCHECKS_IO_TOKEN) {
-    await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`)
+    await got(`https://hc-ping.com/${process.env.HEALTHCHECKS_IO_TOKEN}`, { method: 'POST', body: message })
   }
 };
 
