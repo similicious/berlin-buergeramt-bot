@@ -40,6 +40,15 @@ node index.js
 
 Optionally, you can use a node process manager like pm2 to monitor the app and automatically start the bot on boot.
 
+### Docker
+The bot can also be run using docker. As of now, no image is provided. To build one yourself execute
+```
+docker build . -t similicious/berlin-buergeramt-bot
+```
+Next, create an .env as outlined above and run the container
+```
+docker run -d --env-file .env --name berlin-buergeramt-bot --restart unless-stopped similicious/berlin-buergeramt-bot
+```
 ## Run tests
 I included some snapshots of appointment pages in various states. Execute test with
 ```
