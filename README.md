@@ -49,6 +49,12 @@ Next, create an .env as outlined above and run the container
 ```
 docker run -d --env-file .env --name berlin-buergeramt-bot --restart unless-stopped similicious/berlin-buergeramt-bot
 ```
+
+### Obtaining a bot token and chat id
+It's easiest to use the web / desktop client of Telegram for initial setup. More info on bots [here](https://core.telegram.org/bots/features#creating-a-new-bot).
+- Register a new bot using the Telegram bot `BotFather`.
+- Send the bot a message
+- Open https://api.telegram.org/bot<<BOT_TOKEN>>/getUpdates in a browser and extract the chatId from `result[0].message.chat.id`. You might need to refresh to see the message.
 ## Run tests
 I included some snapshots of appointment pages in various states. Execute test with
 ```
