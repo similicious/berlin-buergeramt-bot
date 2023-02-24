@@ -11,7 +11,9 @@ const sendTelegramNotification = require('./send-telegram-notification');
 const telegramNotificationsEnabled = process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID
 validateConfig();
 
-await sendTelegramNotification('Berlin Buergeramt Bot has started.');
+(async () => {
+  await sendTelegramNotification('Berlin Buergeramt Bot has started.');
+})()
 
 // Setup simple scheduler
 const scheduler = new ToadScheduler()
