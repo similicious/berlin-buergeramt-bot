@@ -4,8 +4,8 @@
   "description": "A bot notify me when an buergeramt appointment is available.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js",
-    "start": "node ./index.js",
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },

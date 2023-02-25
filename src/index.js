@@ -31,6 +31,7 @@ const job = new SimpleIntervalJob(
   { minutes: process.env.CHECK_INTERVAL_MINUTES, runImmediately: true },
   checkForAppointmentsTask
 );
+scheduler.addSimpleIntervalJob(job);
 
 async function checkForAppointments() {
   let bookingPageHtml = await getBookingPageHtml();

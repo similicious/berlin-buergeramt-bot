@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { join } = require("path");
-const getAvailableAppointments = require("../get-available-appointments");
+const getAvailableAppointments = require("../src/get-available-appointments");
 
 test("returns an empty array, when no appointment is available", () => {
   const html = fs.readFileSync(
