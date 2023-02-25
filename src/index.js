@@ -1,5 +1,6 @@
 // Imports
 require("dotenv").config();
+const { HTTPError } = require("got");
 const got = require("got");
 const {
   ToadScheduler,
@@ -34,7 +35,22 @@ const job = new SimpleIntervalJob(
 scheduler.addSimpleIntervalJob(job);
 
 async function checkForAppointments() {
-  let bookingPageHtml = await getBookingPageHtml();
+  let bookingPageHtml;
+
+  try {
+    bookingPageHtml = await getBookingPageHtml();
+  } catch (err) {
+    if (err instanceof HTTPError && err.request.statusCode === 429) {
+      console.error("Bot is rate limited.");
+    } else {
+      throw err;
+    }
+  }
+
+  if (!bookingPageHtml) {
+    return;
+  }
+
   const dates = getAvailableAppointments(bookingPageHtml);
 
   if (dates.length > 0 && telegramNotificationsEnabled) {
