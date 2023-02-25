@@ -40,6 +40,7 @@ async function checkForAppointments() {
   try {
     bookingPageHtml = await getBookingPageHtml();
   } catch (err) {
+    // For now we do not act on rate limiting. This code only exists to ensure, we're correctly detecting rate limiting.
     if (err instanceof HTTPError && err.request.statusCode === 429) {
       console.error("Bot is rate limited.");
     } else {
