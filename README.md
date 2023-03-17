@@ -44,10 +44,10 @@ TELEGRAM_CHAT_ID=
 HEALTHCHECKS_IO_TOKEN=Optional healthchecks.io token to monitor the bot
 ```
 
-- start index.js
+- start src/index.js
 
 ```
-node index.js
+node src/index.js
 ```
 
 Optionally, you can use a node process manager like pm2 to monitor the app and automatically start the bot on boot.
