@@ -1,11 +1,15 @@
-const fs = require("fs");
-const { join } = require("path");
-const getAvailableAppointments = require("../src/get-available-appointments");
+import fs from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { getAvailableAppointments } from "../src/get-available-appointments";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 test("returns an empty array, when no appointment is available", () => {
   const html = fs.readFileSync(
     join(__dirname, "fixtures", "no-appointment-available.html"),
-    { encoding: "utf-8" }
+    { encoding: "utf-8" },
   );
 
   const appointments = getAvailableAppointments(html);
@@ -15,7 +19,7 @@ test("returns an empty array, when no appointment is available", () => {
 test("returns one appointment, when one is available", () => {
   const html = fs.readFileSync(
     join(__dirname, "fixtures", "one-appointment-available.html"),
-    { encoding: "utf-8" }
+    { encoding: "utf-8" },
   );
 
   const appointments = getAvailableAppointments(html);
@@ -25,7 +29,7 @@ test("returns one appointment, when one is available", () => {
 test("returns multiple appointment, when multiple are available", () => {
   const html = fs.readFileSync(
     join(__dirname, "fixtures", "multiple-appointments-available.html"),
-    { encoding: "utf-8" }
+    { encoding: "utf-8" },
   );
 
   const appointments = getAvailableAppointments(html);

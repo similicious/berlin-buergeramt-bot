@@ -1,6 +1,6 @@
-const got = require("got");
+import got from "got";
 
-async function getBookingPageHtml() {
+export async function getBookingPageHtml() {
   // Request booking url to receive the booking system cookie
   let res = await got(process.env.BOOKING_URL, {
     headers: { "user-agent": process.env.USER_AGENT },
@@ -21,5 +21,3 @@ async function getBookingPageHtml() {
   });
   return res.body;
 }
-
-module.exports = getBookingPageHtml;

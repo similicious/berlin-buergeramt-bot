@@ -1,16 +1,12 @@
 // Imports
-require("dotenv").config();
-const { HTTPError } = require("got");
-const got = require("got");
-const {
-  ToadScheduler,
-  SimpleIntervalJob,
-  AsyncTask,
-} = require("toad-scheduler");
+import "dotenv/config";
+import { HTTPError } from "got";
+import got from "got";
+import { ToadScheduler, SimpleIntervalJob, AsyncTask } from "toad-scheduler";
 
-const getAvailableAppointments = require("./get-available-appointments");
-const getBookingPageHtml = require("./get-booking-page-html");
-const sendTelegramNotification = require("./send-telegram-notification");
+import { getAvailableAppointments } from "./get-available-appointments.js";
+import { getBookingPageHtml } from "./get-booking-page-html.js";
+import { sendTelegramNotification } from "./send-telegram-notification.js";
 
 // Validate configuration values in .env
 const telegramNotificationsEnabled =
@@ -26,11 +22,11 @@ const scheduler = new ToadScheduler();
 const checkForAppointmentsTask = new AsyncTask(
   "checkForAppointments",
   checkForAppointments,
-  handleErrors
+  handleErrors,
 );
 const job = new SimpleIntervalJob(
   { minutes: process.env.CHECK_INTERVAL_MINUTES, runImmediately: true },
-  checkForAppointmentsTask
+  checkForAppointmentsTask,
 );
 scheduler.addSimpleIntervalJob(job);
 
@@ -89,26 +85,26 @@ function validateConfig() {
   } = process.env;
   if (!BOOKING_URL | !CHECK_INTERVAL_MINUTES) {
     console.error(
-      "BOOKING_URL or CHECK_INTERVAL_MINUTES have not been set. Please set values in .env according to README."
+      "BOOKING_URL or CHECK_INTERVAL_MINUTES have not been set. Please set values in .env according to README.",
     );
     process.exit(1);
   }
 
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     console.warn(
-      "TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID has not been set. You will receive no notifications for appointments."
+      "TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID has not been set. You will receive no notifications for appointments.",
     );
   }
 
   if (!USER_AGENT) {
     console.warn(
-      "USER_AGENT has not been set. Please add contact information."
+      "USER_AGENT has not been set. Please add contact information.",
     );
   }
 
   if (!HEALTHCHECKS_IO_TOKEN) {
     console.info(
-      "HEALTHCHECKS_IO_TOKEN has not been set. The script execution will not be monitored."
+      "HEALTHCHECKS_IO_TOKEN has not been set. The script execution will not be monitored.",
     );
   }
 }

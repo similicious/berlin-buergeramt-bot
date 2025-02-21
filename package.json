@@ -6,21 +6,25 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
-  "author": "Simon Wienecke",
+  "author": "similicious",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.0.3",
-    "got": "^11.8.6",
-    "prettier": "2.8.4",
-    "toad-scheduler": "^2.2.0"
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "got": "^14.4.6",
+    "prettier": "3.5.1",
+    "toad-scheduler": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "^16.18.12",
-    "jest": "^29.4.3",
-    "nodemon": "^2.0.12"
+    "@types/node": "^22.13.4",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

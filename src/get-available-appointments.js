@@ -1,6 +1,6 @@
-const cheerio = require("cheerio");
+import * as cheerio from "cheerio";
 
-function getAvailableAppointments(html) {
+export function getAvailableAppointments(html) {
   const $ = cheerio.load(html);
   const appointmentLinks = $("td.buchbar a");
   return appointmentLinks
@@ -11,5 +11,3 @@ function getAvailableAppointments(html) {
     })
     .toArray();
 }
-
-module.exports = getAvailableAppointments;

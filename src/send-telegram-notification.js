@@ -1,6 +1,6 @@
-const got = require("got");
+import got from "got";
 
-async function sendTelegramNotification(message) {
+export async function sendTelegramNotification(message) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -17,5 +17,3 @@ async function sendTelegramNotification(message) {
     },
   });
 }
-
-module.exports = sendTelegramNotification;
