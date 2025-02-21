@@ -1,2 +1,7 @@
 node_modules
 npm-debug.log
+.github
+README.md
+LICENSE
+.env.sample
+.editorconfig
